@@ -4,3 +4,8 @@
 @media(max-width:600px){header{padding:0 18px}.button.small{font-size:11px;padding:0 12px}.hero h1,.section h2,.final h2{font-size:46px;letter-spacing:-2px}.hero-copy{padding:70px 22px 45px}.lede{font-size:16px}.actions{flex-direction:column;align-items:stretch}.product-shell{margin:0 12px 35px;padding:6px;overflow:hidden}.product-body{height:430px;grid-template-columns:85px 1fr}.product-body aside{padding:10px 5px}.canvas{padding:14px}.stats{grid-template-columns:1fr}.stats article:nth-child(n+2){display:none}.builder{grid-template-columns:1fr}.builder>div:first-child{display:none}.proof div{gap:20px}.three,.roadgrid{grid-template-columns:1fr}.roadgrid .now{transform:none}.section{padding:70px 22px}.doclinks{grid-template-columns:1fr}footer{grid-template-columns:1fr}footer>p{text-align:left}footer>div{flex-wrap:wrap}footer>div a:last-child{margin-left:0;width:100%}}
 @media(max-width:600px){header{justify-content:space-between;gap:12px}.brand{font-size:22px;letter-spacing:-.8px;white-space:nowrap}.brand span{width:28px;height:28px;flex:0 0 28px}header>.button.small{margin-left:auto;min-width:0;white-space:nowrap;padding:0 11px;font-size:10px}}
 @media(max-width:340px){header{padding:0 12px;gap:8px}.brand{font-size:20px}.brand span{width:26px;height:26px;flex-basis:26px}header>.button.small{padding:0 9px;font-size:9px}}
+/* Keep the policy-required footer backlink clear of Netlify's fixed deploy badge. */
+footer{padding-bottom:118px}
+footer>div a:last-child{margin-right:190px;white-space:nowrap}
+@media(max-width:600px){footer{padding-bottom:128px}footer>div a:last-child{margin-right:0;padding-right:150px;white-space:normal;line-height:1.5}}
+@media(max-width:380px){footer>div a:last-child{padding-right:118px}}
