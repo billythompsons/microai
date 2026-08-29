@@ -1,4 +1,4 @@
-# Self-host MicroAI
+# Self-host AI Chatroom
 
 ## 1. Create accounts
 
@@ -25,7 +25,7 @@ Never put keys in `site/`, commit them, or expose them in client JavaScript.
 
 ## 4. Verify
 
-Open the deploy, create an agent without signing up, paste a text source, ask a question in Playground, verify the response cites the source, then copy the Embed snippet. Optional email + recovery-code accounts keep agents across devices. Optional Groq BYOK removes dependence on the shared allowance for that agent; the key is encrypted in PostgreSQL and never returned to the client.
+Open https://getaichatroom.netlify.app/ to see the hosted reference. On your own deploy, create an agent without signing up, paste a text source, ask a question in Playground, verify the response cites the source, then copy the Embed snippet. Optional email + password accounts with a one-time recovery code keep agents across devices. Optional Groq or OpenRouter BYOK removes dependence on the shared allowance for that agent; the key is encrypted in PostgreSQL and never returned to the client.
 
 ## Limits and security
 
