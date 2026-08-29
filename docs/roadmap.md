@@ -1,11 +1,16 @@
-# Future work
+# Roadmap
 
-The public multi-tenant builder, anonymous sessions, accounts, text and URL ingestion, pgvector retrieval, citations, streaming playground, and embeddable web component are shipped.
+## Phase 1 - foundation
+Netlify configuration; static site; workspace, membership, agent, API key, source and conversation schema; provider-neutral contracts; health endpoint; checks and community documents.
 
-## Next
+## Phase 2 - knowledge
+SSRF-safe URL/sitemap intake; PDF, DOCX, TXT, Markdown and pasted-text parsing; checkpointed embedding jobs; pgvector retrieval, citations, delete and re-index.
 
-- File upload parsers for PDF, DOCX, and common text formats
-- Source deletion and re-indexing controls
-- Feedback, unanswered-question summaries, and usage exports
-- Optional custom actions with explicit permissions, egress controls, and audit logs
-- Optional verified-email and magic-link flows for deployments that connect an email provider
+## Phase 3 - chat
+Agent settings; playground; streaming endpoint; domain-restricted themed widget; conversation continuity and lead form.
+
+## Phase 4 - learning
+Review and feedback; unanswered-query queue; usage and CSV export; first allowlisted schema-defined HTTP action.
+
+## Not v1
+Voice, telephony, campaigns, WhatsApp/email/helpdesk listeners, SSO/SCIM, arbitrary code, Kubernetes, and local-model hosting on Netlify.

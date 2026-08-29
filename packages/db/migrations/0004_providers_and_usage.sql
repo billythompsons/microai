@@ -21,3 +21,5 @@ create table if not exists public_chat_history (
  created_at timestamptz not null default now()
 );
 create index if not exists public_chat_history_owner_agent_idx on public_chat_history(owner_hash,agent_public_id,created_at desc);
+alter table public_sources drop constraint if exists public_sources_kind_check;
+alter table public_sources add constraint public_sources_kind_check check(kind in ('text','url','file'));
