@@ -1,8 +1,8 @@
-# MicroAI
+# AI Chatroom
 
-MicroAI is an immediately usable, open-source, Netlify-native cited chat app. Open the deployed site, ask about the project, and receive a streamed answer grounded in MicroAI's public docs with source links. It is not affiliated with Chatbase.
+AI Chatroom is an immediately usable, open-source, Netlify-native cited chat app. Open the deployed site, ask about the project, and receive a streamed answer grounded in MicroAI's public docs with source links. It is not affiliated with Chatbase.
 
-> **Status:** The public app is live at https://microaioss.netlify.app/. It opens directly into chat. Bounded ingestion, deterministic local embeddings, Neon pgvector retrieval, Groq streaming generation, citations, rate limits, and the reusable chat component are live. The full multi-tenant builder and file/URL parsers remain roadmap work.
+> **Status:** The public app is live at your Netlify site URL. It opens directly into chat. Bounded ingestion, deterministic local embeddings, Neon pgvector retrieval, Groq streaming generation, citations, rate limits, and the reusable chat component are live. The full multi-tenant builder and file/URL parsers remain roadmap work.
 
 ## Netlify-first design
 
@@ -18,6 +18,12 @@ Long-running workers, a bundled database, local model hosting on Netlify, unboun
 - `packages/db/migrations/`: PostgreSQL/pgvector schema
 - `packages/widget/`: reusable cited chat client
 - `docs/`: architecture and roadmap
+
+## Deploy your own
+
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/billythompsons/microai)
+
+See [SELF_HOSTING.md](SELF_HOSTING.md) for Neon, Groq, environment-variable, security, quota, and end-to-end verification steps.
 
 ## Quick start
 
@@ -49,4 +55,4 @@ The public app indexes MicroAI's own public docs into a 384-dimensional determin
 - `POST /api/chat`: pgvector retrieval plus streamed cited Groq answer
 - `POST /api/seed`: authenticated idempotent seeding of the public docs
 
-The public endpoint is capped at 150 requests/day globally and 8 per client hash/day. The demo does not expose general-purpose user ingestion. Set `DATABASE_URL`, `GROQ_API_KEY`, `INGEST_SECRET`, and `RATE_LIMIT_SALT` only in Netlify.
+The shared endpoint defaults to 900 requests/day globally, 30 per visitor hash/day, and 120 per agent/day. Anyone can create an agent, add pasted text or a public URL, chat, and copy an embed without an account or key. Optional accounts keep agents across devices. Optional Groq BYOK is encrypted server-side and gives an agent its own provider limits. Set all secrets only in Netlify.
