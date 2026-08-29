@@ -1,0 +1,2 @@
+import type {ModelProvider} from "./types.js"; import {OpenAICompatibleProvider} from "./openai-compatible.js";
+export function createProvider(id:string,env:{OPENAI_API_KEY?:string;OPENAI_COMPATIBLE_BASE_URL?:string}):ModelProvider {if(id==="openai"||id==="openai-compatible"){if(!env.OPENAI_API_KEY)throw new Error("OPENAI_API_KEY is required");return new OpenAICompatibleProvider({apiKey:env.OPENAI_API_KEY,baseUrl:env.OPENAI_COMPATIBLE_BASE_URL});}throw new Error(`Provider '${id}' is not available in Phase 1`);}

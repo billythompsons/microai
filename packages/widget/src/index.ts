@@ -1,0 +1,1 @@
+export interface MicroAIWidgetOptions{agentId:string;apiBase?:string;theme?:"light"|"dark"} export function mountMicroAI(_o:MicroAIWidgetOptions):never{throw new Error("The widget is scheduled for Phase 3.")}
