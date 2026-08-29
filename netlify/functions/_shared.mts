@@ -1,0 +1,10 @@
+import {neon} from "@neondatabase/serverless";
+import {createHash} from "node:crypto";
+import {localEmbedding,vectorLiteral} from "../../packages/core/src/embedding.ts";
+export const AGENT="microai-docs"; export const DAILY_CAP=150; export const CLIENT_CAP=8;
+export function db(){if(!process.env.DATABASE_URL)throw new Error("DATABASE_URL is not configured");return neon(process.env.DATABASE_URL)}
+export function json(data:unknown,status=200,headers:Record<string,string>={}){return new Response(JSON.stringify(data),{status,headers:{"content-type":"application/json; charset=utf-8","cache-control":"no-store",...headers}})}
+export function clientHash(req:Request){const ip=req.headers.get("x-nf-client-connection-ip")||req.headers.get("x-forwarded-for")?.split(",")[0]||"unknown";return createHash("sha256").update(`${process.env.RATE_LIMIT_SALT||"microai-demo"}:${ip}`).digest("hex").slice(0,32)}
+export async function consume(req:Request){const sql=db(),client=clientHash(req);const total=await sql`select coalesce(sum(requests),0)::int as count from demo_usage where day=current_date`;if(Number(total[0].count)>=DAILY_CAP)return{ok:false,message:"The public demo reached today's safety cap. Try again tomorrow or run MicroAI yourself."};const own=await sql`insert into demo_usage(day,client_hash,requests) values(current_date,${client},1) on conflict(day,client_hash) do update set requests=demo_usage.requests+1,updated_at=now() returning requests`;if(Number(own[0].requests)>CLIENT_CAP)return{ok:false,message:"This browser reached the public demo limit for today."};return{ok:true};}
+export async function retrieve(question:string,limit=5){const sql=db();const literal=vectorLiteral(localEmbedding(question));return sql`select source_title,source_url,content,1-(embedding <=> ${literal}::vector) as score from knowledge_chunks where agent_public_id=${AGENT} order by embedding <=> ${literal}::vector limit ${limit}`;}
+export function allowed(req:Request){const origin=req.headers.get("origin");return !origin||origin.endsWith(".netlify.app")||origin==="https://microai-oss.netlify.app"||origin.startsWith("http://localhost:")}
